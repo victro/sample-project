@@ -9,7 +9,7 @@ function Login() {
     return (
       <section>
         <MuiThemeProvider>
-            <AppBar title="Login" />
+            <AppBar title="Login" showMenuIconButton={false}/>
             <fieldset className="login-field">
                 <TextField
                     hintText="Username"
@@ -26,7 +26,7 @@ function Login() {
                     />
             </fieldset>
             <RaisedButton label="Login" primary={true}  onClick={() => {}}/>
-         </MuiThemeProvider>     
+        </MuiThemeProvider>     
       </section>
     );
 }

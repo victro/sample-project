@@ -1,12 +1,13 @@
 import React from 'react';
-import './App.css';
-import Login from './components/Login';
-import UserProfile from './components/UserProfile';
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
+import Login from './components/Login';
+import UserProfile from './components/UserProfile';
+import Admin from './components/Admin';
+import './App.css';
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
           </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/admin">
+            <Admin />
           </Route>
           <Route path="/">
             <Login />
