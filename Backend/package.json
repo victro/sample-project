@@ -27,5 +27,8 @@
         "module-alias": "^2.2.2",
         "mongodb": "^3.3.3",
         "express": "^4.17.1"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.4"
     }
 }
