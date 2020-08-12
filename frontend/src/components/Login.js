@@ -3,32 +3,29 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-
 import './Login.css';
 
 function Login() {
     return (
       <section>
         <MuiThemeProvider>
-            <AppBar
-                title="Login"
-            />
-            <fieldset class="login-field">
+            <AppBar title="Login" />
+            <fieldset className="login-field">
                 <TextField
-                    hintText="Enter your Username"
+                    hintText="Username"
                     floatingLabelText="Username"
-                    onChange = {(event,newValue) => this.setState({username:newValue})}
+                    onChange = {() => {}}
                     />
             </fieldset>
-            <fieldset class="login-field">
+            <fieldset className="login-field">
                 <TextField
                     type="password"
-                    hintText="Enter your Password"
+                    hintText="Password"
                     floatingLabelText="Password"
-                    onChange = {(event,newValue) => this.setState({password:newValue})}
+                    onChange = {() => {}}
                     />
             </fieldset>
-            <RaisedButton label="Submit" primary={true}  onClick={(event) => this.handleClick(event)}/>
+            <RaisedButton label="Login" primary={true}  onClick={() => {}}/>
          </MuiThemeProvider>     
       </section>
     );
