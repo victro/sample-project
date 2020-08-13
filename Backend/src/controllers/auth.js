@@ -22,11 +22,7 @@ const verifyCredentials = async (request, response) => {
     try {
         let { email, password } = request.body;
         const admin = await Admin.findOne({ email });
-        console.log('THE ADMIN')
-        console.log(admin)
         const isAdminValid = bcrypt.compareSync(password, admin.password);
-        console.log('*********is admin valid?*********', isAdminValid)
-        console.log('what is the admin value', admin)
         return isAdminValid ? admin : Promise.reject('Bad credentials');
     } catch (err) {
         response.status(401).json({success: false, error: 'Bad credentials'});
@@ -46,12 +42,8 @@ const provideToken = (user) => {
 const provideTokenIfValid = async (request, response) => {
     try {
         const verifiedAdmin = await verifyCredentials(request, response);
-        console.log('VERIFIED ADMIN')
-        console.log(verifiedAdmin)
         if (verifiedAdmin) {
             const token = provideToken(verifiedAdmin);
-            console.log('got token')
-            console.log(token)
             response.status(200).json({
                 success: true,
                 token,
@@ -59,7 +51,6 @@ const provideTokenIfValid = async (request, response) => {
             });
         }
     } catch(err) {
-        console.log('SOMETHING CATCHED?')
         response.status(401).json({success: false, error: err});
     }
 };
