@@ -1,0 +1,30 @@
+version: '2.0'
+
+services:
+  backend-api:
+    container_name: backend
+    restart: always
+    build: ./backend/
+    command: npm run dev
+    working_dir: /usr/src/backend-api
+    ports:
+      - "3000:3000"
+    # uncomment volumes if development
+    volumes:
+      - ./backend/:/usr/src/backend-api
+      - /usr/src/backend-api/node_modules
+    environment:
+      MONGO_DBNAME: sample_project
+      MONGO_URI: mongodb://mongo/sample_project
+      JWT_SECRET_KEY: 'JWT_SAMPLE_PROJECT_SECRET'
+      ADMIN_PASSWORD: '123456'
+    links:
+      - mongo
+  
+  mongo:
+    image: mongo:latest
+    environment:
+      MONGO_DBNAME: 'sample_project'
+      MONGO_URI: mongo://mongo/sample_project
+    ports:
+      - "27017:27017"
