@@ -26,7 +26,7 @@ function Admin(props) {
                 console.log('THE RESPONSE');
                 setRows(res.data.users);
             })
-    }, [rows])
+    }, [])
     return (
         <MuiThemeProvider>
             <AppBar title="Admin dashboard">
