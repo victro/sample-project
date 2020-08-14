@@ -23,6 +23,8 @@ const verifyCredentials = async (request, response) => {
         let { email, password } = request.body;
         const admin = await Admin.findOne({ email });
         const isAdminValid = bcrypt.compareSync(password, admin.password);
+        console.log('*********** THE BODY *******')
+        console.log(request.body)
         return isAdminValid ? admin : Promise.reject('Bad credentials');
     } catch (err) {
         response.status(401).json({success: false, error: 'Bad credentials'});

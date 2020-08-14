@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import Table from 'material-ui/Table';
@@ -6,21 +6,32 @@ import TableHeader from 'material-ui/Table/TableHeader';
 import TableRow from 'material-ui/Table/TableRow';
 import TableRowColumn from 'material-ui/Table/TableRowColumn';
 import TableBody from 'material-ui/Table/TableBody';
+import { FlatButton } from 'material-ui';
+import './Admin.css';
+import auth from '../auth/auth';
+import axios from 'axios';
 
 function Admin(props) {
-    const rows = [];
-    for (let i = 0; i < 10; i += 1) {
-        rows.push({
-            firstName: "Victor",
-            lastName: "Rios",
-            telephoneNumber: "555-2323992",
-            fullAddress: "lorem ipsum",
-            ssn: "13"
+    const [rows, setRows] = useState([]);
+
+    const logoutUser = () => {
+        auth.logout(() => {
+            props.history.push('/login');
         });
-    }
+    };
+
+    useEffect(() => {
+        axios.get('http://localhost:3000/users')
+            .then((res) => {
+                console.log('THE RESPONSE');
+                setRows(res.data.users);
+            })
+    }, [rows])
     return (
         <MuiThemeProvider>
-            <AppBar title="Admin dashboard" />
+            <AppBar title="Admin dashboard">
+                <FlatButton className="logout-button" onClick={logoutUser}>Logout</FlatButton>
+            </AppBar>
             <Table>
                 <TableHeader>
                     <TableRow>
@@ -32,8 +43,8 @@ function Admin(props) {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {rows.map((row) => (
-                        <TableRow key={row.name}>
+                    {rows.map((row, index) => (
+                        <TableRow key={index}>
                             <TableRowColumn>{row.firstName}</TableRowColumn>
                             <TableRowColumn>{row.lastName}</TableRowColumn>
                             <TableRowColumn>{row.telephoneNumber}</TableRowColumn>
